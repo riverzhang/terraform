@@ -15,6 +15,15 @@ type NodeApplyableOutput struct {
 	Config    *config.Output // Config is the output in the config
 }
 
+var (
+	_ GraphNodeSubPath          = (*NodeApplyableOutput)(nil)
+	_ RemovableIfNotTargeted    = (*NodeApplyableOutput)(nil)
+	_ GraphNodeTargetDownstream = (*NodeApplyableOutput)(nil)
+	_ GraphNodeReferenceable    = (*NodeApplyableOutput)(nil)
+	_ GraphNodeReferencer       = (*NodeApplyableOutput)(nil)
+	_ GraphNodeEvalable         = (*NodeApplyableOutput)(nil)
+)
+
 func (n *NodeApplyableOutput) Name() string {
 	result := fmt.Sprintf("output.%s", n.Config.Name)
 	if len(n.PathValue) > 1 {
@@ -100,6 +109,14 @@ type NodeDestroyableOutput struct {
 	PathValue []string
 	Config    *config.Output // Config is the output in the config
 }
+
+var (
+	_ GraphNodeSubPath          = (*NodeDestroyableOutput)(nil)
+	_ RemovableIfNotTargeted    = (*NodeDestroyableOutput)(nil)
+	_ GraphNodeTargetDownstream = (*NodeDestroyableOutput)(nil)
+	_ GraphNodeReferencer       = (*NodeDestroyableOutput)(nil)
+	_ GraphNodeEvalable         = (*NodeDestroyableOutput)(nil)
+)
 
 func (n *NodeDestroyableOutput) Name() string {
 	result := fmt.Sprintf("output.%s (destroy)", n.Config.Name)
